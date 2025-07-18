@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe8ec, #e0f7fa);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .gif-container {
+      margin: 20px 0;
+    }
+
+    .gif-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: nowrap;
+      margin-top: 20px;
+    }
+
+    .controls button {
+      width: 100px;
+      padding: 8px;
+      border: none;
+      border-radius: 10px;
+      background-color: #3ca27a;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: background-color 0.2s;
+    }
+
+    .controls button:hover {
+      background-color: #2a7357;
+    }
+
+    .controls button:active {
+      background-color: #3ca27a; /* 點擊時維持淺綠色 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="gif-container">
+      <img src="images/BirthdayCard.gif" alt="生日GIF">
+    </div>
+
+    <div class="controls">
+      <button onclick="togglePlay()">⏯️ 播放/暫停</button>
+      <button onclick="restartAudio()">🔁 重新播放</button>
+      <button onclick="toggleMute()">🔇 靜音</button>
+    </div>
+
+    <audio id="birthdaySong" autoplay>
+      <source src="music/hbdsong.mp3" type="audio/mpeg">
+      您的瀏覽器不支援音樂播放。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById("birthdaySong");
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    function restartAudio() {
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function toggleMute() {
+      audio.muted = !audio.muted;
+    }
+
+    document.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    }, { once: true });
+  </script>
+
+</body>
+</html>
